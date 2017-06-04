@@ -22,5 +22,11 @@ def get_data():
 	data=json.dumps(cursor.fetchone())
 	return Response(data, status=200, mimetype='application/json')
 
+@app.route("/post", methods=['POST'])
+def add():
+	cursor.execute("INSERT INTO Data(data) VALUES (%s)", request.json.get("data", ""))
+	conn.commit()
+	return Response(status=201, mimetype='application/json')
+
 if __name__ == "__main__":
     app.run()
