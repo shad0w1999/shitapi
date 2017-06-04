@@ -19,7 +19,7 @@ def hello():
 @app.route("/get", methods=['GET'])
 def get_data():
 	cursor.execute("SELECT * from Data")
-	data=json.dumps(cursor.fetchone())
+	data=json.dumps(cursor.fetchall())
 	return Response(data, status=200, mimetype='application/json')
 
 @app.route("/post", methods=['POST'])
