@@ -12,17 +12,13 @@ mysql.init_app(app)
 conn = mysql.connect()
 cursor =conn.cursor()
 
-@app.route("/")
-def hello():
-    return "ShitAPI v1.0"
-
-@app.route("/get", methods=['GET'])
+@app.route("/", methods=['GET'])
 def get_data():
 	cursor.execute("SELECT * from Data")
 	data=json.dumps(cursor.fetchall())
 	return Response(data, status=200, mimetype='application/json')
 
-@app.route("/post", methods=['POST'])
+@app.route("/", methods=['POST'])
 def add():
 	cursor.execute("INSERT INTO Data(data) VALUES (%s)", request.json.get("data", ""))
 	conn.commit()
