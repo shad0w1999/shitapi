@@ -31,5 +31,12 @@ def put():
 	conn.commit()
 	return Response(status=200, mimetype='application/json')
 
+@app.route("/", methods=['DELETE'])
+def delete():
+	data=request.json
+	cursor.execute("DELETE FROM Data WHERE id=%s", (data.get("id", '')))
+	conn.commit()
+	return Response(status=200, mimetype='application/json')
+
 if __name__ == "__main__":
     app.run()
