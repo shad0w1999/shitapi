@@ -22,21 +22,21 @@ def get_data():
 def add():
 	cursor.execute("INSERT INTO Data(data) VALUES (%s)", request.json.get("data", ""))
 	conn.commit()
-	return Response(status=201, mimetype='application/json')
+	return Response(status=201)
 
 @app.route("/", methods=['PUT'])
 def put():
 	data=request.json
 	cursor.execute("UPDATE Data SET data=\"%s\" WHERE id=%s", (data.get("data", ""), (data.get("id", ''))))
 	conn.commit()
-	return Response(status=200, mimetype='application/json')
+	return Response(status=200)
 
 @app.route("/", methods=['DELETE'])
 def delete():
 	data=request.json
 	cursor.execute("DELETE FROM Data WHERE id=%s", (data.get("id", '')))
 	conn.commit()
-	return Response(status=200, mimetype='application/json')
+	return Response(status=200)
 
 if __name__ == "__main__":
     app.run()
