@@ -24,5 +24,12 @@ def add():
 	conn.commit()
 	return Response(status=201, mimetype='application/json')
 
+@app.route("/", methods=['PUT'])
+def put():
+	data=request.json
+	cursor.execute("UPDATE Data SET data=\"%s\" WHERE id=%s", (data.get("data", ""), (data.get("id", ''))))
+	conn.commit()
+	return Response(status=200, mimetype='application/json')
+
 if __name__ == "__main__":
     app.run()
